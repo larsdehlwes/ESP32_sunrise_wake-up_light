@@ -1,5 +1,5 @@
 # ESP32_sunrise_wake-up_light
-This Arduino IDE project allows to use an ESP32 in order to control a smart RGBCCT light bulb running Tasmota. The ESP32 itself acts as a server in the local WiFi through which a wake-up time can be set-up. In the 40 minutes preceeding the wake-up time, the ESP32 will send http requests to the smart light bulb, mimicking the color and light intensity curves of a sunrise.
+This Arduino IDE project allows to use an ESP32 in order to control a smart RGBCCT light bulb running Tasmota. The ESP32 itself acts as a server in the local WiFi through which a wake-up time can be set up. In the 40 minutes preceeding the wake-up time, the ESP32 will send http requests to the smart light bulb, mimicking the color and light intensity curves of a sunrise.
 
 ## Dependencies
 * Arduino IDE with the Espressif board manager installed
