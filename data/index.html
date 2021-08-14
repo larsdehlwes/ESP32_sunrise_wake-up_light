@@ -1,0 +1,52 @@
+<!DOCTYPE HTML><html>
+<head>
+  <style>
+    body {
+      min-width: 310px;
+        max-width: 600px;
+        height: 600px;
+      margin: 0 auto;
+    }
+    h2 {
+      font-family: Arial;
+      font-size: 2.5rem;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>ESP32 Sunrise Wake-Up Light</h2>
+  <label for="appt">Choose a time for your personalized sunrise!</label>
+  <form action="/get" target="hidden-form">
+    Set wake up time: 
+    <input type="time" id="wkp" name="wkp" value="06:30" required>
+    <input type="submit" value="Submit" onclick="submitMessage()">
+  </form><br>
+  <iframe style="display:none" name="hidden-form"></iframe>
+  <p id="headsup"></p>
+</body>
+<script>
+function submitMessage() {
+  alert("Saved value to ESP SPIFFS");
+  setTimeout(function(){ document.location.reload(false); }, 500);
+}
+function reloadCountdown(){
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200){
+      var Data=JSON.parse(this.responseText);
+      var timerstring = Data.Timerstring;
+      document.getElementById("headsup").innerHTML = timerstring;
+    }
+  };
+  xhttp.open("GET", "/timerstring", false);
+  xhttp.send();
+}
+reloadCountdown();
+// Update the heads-up every 5 seconds
+var x = setInterval(function() {
+  reloadCountdown();
+}, 5000);
+</script>
+</html>
